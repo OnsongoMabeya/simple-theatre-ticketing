@@ -40,14 +40,14 @@ A modern, responsive web application for theatre event booking built with Next.j
 
 ## Installation
 
-1. Clone the repository:
+1 Clone the repository:
 
 ```bash
-git clone <repository-url>
+git clone git@github.com:OnsongoMabeya/simple-theatre-ticketing.git
 cd new-theatre-seating-app/my-app
 ```
 
-2. Install dependencies:
+2 Install dependencies:
 
 ```bash
 npm install
@@ -55,7 +55,7 @@ npm install
 yarn install
 ```
 
-3. Run the development server:
+3 Run the development server:
 
 ```bash
 npm run dev
@@ -63,7 +63,7 @@ npm run dev
 yarn dev
 ```
 
-4. Open [http://localhost:3000](http://localhost:3000) in your browser
+4 Open [http://localhost:3000](http://localhost:3000) in your browser
 
 ## Project Structure
 
@@ -130,20 +130,20 @@ The application includes an administrative interface for managing bookings and v
 1. **Booking Management**
    - View all theatre bookings in a centralized dashboard
    - See booking details including:
-     * Reference numbers
-     * Event information
-     * Customer details
-     * Seat assignments
-     * Event dates and times
-     * Check-in status
+     - Reference numbers
+     - Event information
+     - Customer details
+     - Seat assignments
+     - Event dates and times
+     - Check-in status
 
 2. **Search and Filter**
    - Real-time search functionality
    - Filter bookings by:
-     * Event name
-     * Customer name
-     * Seat numbers
-     * Reference numbers
+     - Event name
+     - Customer name
+     - Seat numbers
+     - Reference numbers
 
 3. **Check-in System**
    - Mark attendees as checked-in

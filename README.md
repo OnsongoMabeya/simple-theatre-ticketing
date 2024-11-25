@@ -40,50 +40,50 @@ A modern, responsive web application for theatre event booking built with Next.j
 
 ## Installation
 
-    1. Clone the repository:
+1. Clone the repository:
 
-    ```bash
-    git clone <repository-url>
-    cd new-theatre-seating-app/my-app
-    ```
+```bash
+git clone <repository-url>
+cd new-theatre-seating-app/my-app
+```
 
-    2. Install dependencies:
+2. Install dependencies:
 
-    ```bash
-    npm install
-    # or
-    yarn install
-    ```
+```bash
+npm install
+# or
+yarn install
+```
 
-    3. Run the development server:
+3. Run the development server:
 
-    ```bash
-    npm run dev
-    # or
-    yarn dev
-    ```
+```bash
+npm run dev
+# or
+yarn dev
+```
 
-    4. Open [http://localhost:3000](http://localhost:3000) in your browser
+4. Open [http://localhost:3000](http://localhost:3000) in your browser
 
 ## Project Structure
 
-    ```bash
-    my-app/
-    ├── src/
-    │   ├── app/
-    │   │   ├── booking/
-    │   │   │   └── [hallId]/
-    │   │   │       └── [eventId]/
-    │   │   │           └── page.js    # Booking page with seat selection
-    │   │   ├── page.js                # Landing page with event listings
-    │   │   └── ThemeProvider.js       # MUI theme configuration
-    │   └── data/
-    │       ├── theatreData.json       # Event and venue data
-    │       └── bookings.json          # Booking records
-    ├── public/
-    │   └── images/                    # Static images
-    └── package.json
-    ```
+```bash
+my-app/
+├── src/
+│   ├── app/
+│   │   ├── booking/
+│   │   │   └── [hallId]/
+│   │   │       └── [eventId]/
+│   │   │           └── page.js    # Booking page with seat selection
+│   │   ├── page.js                # Landing page with event listings
+│   │   └── ThemeProvider.js       # MUI theme configuration
+│   └── data/
+│       ├── theatreData.json       # Event and venue data
+│       └── bookings.json          # Booking records
+├── public/
+│   └── images/                    # Static images
+└── package.json
+```
 
 ## Features in Detail
 
@@ -113,27 +113,27 @@ A modern, responsive web application for theatre event booking built with Next.j
 
 ### Running Tests
 
-    ```bash
-    npm run test
-    # or
-    yarn test
-    ```
+```bash
+npm run test
+# or
+yarn test
+```
 
 ### Building for Production
 
-    ```bash
-    npm run build
-    # or
-    yarn build
-    ```
+```bash
+npm run build
+# or
+yarn build
+```
 
 ### Starting Production Server
 
-    ```bash
-    npm run start
-    # or
-    yarn start
-    ```
+```bash
+npm run start
+# or
+yarn start
+```
 
 ## Contributing
 

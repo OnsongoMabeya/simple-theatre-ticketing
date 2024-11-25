@@ -1,36 +1,150 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Theatre Booking System
 
-## Getting Started
+A modern, responsive web application for theatre event booking built with Next.js and Material-UI.
 
-First, run the development server:
+## Features
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+- 📅 Browse upcoming theatre events
+- 🎭 Multiple venue halls with different seating configurations
+- 🔍 Real-time search functionality
+- 💺 Interactive seat selection
+- 🎟️ Easy booking process
+- 📱 Responsive design for all devices
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Venue Configuration
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+### Main Hall
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- Capacity: 150 seats (10 rows × 15 seats)
+- Perfect for large productions
+- Alphabetic row labeling (A-J)
 
-## Learn More
+### Studio Theatre
 
-To learn more about Next.js, take a look at the following resources:
+- Capacity: 96 seats (8 rows × 12 seats)
+- Ideal for intimate performances
+- Alphabetic row labeling (A-H)
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Tech Stack
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- **Framework**: Next.js 14
+- **UI Library**: Material-UI (MUI)
+- **Styling**: Emotion (MUI's styling solution)
+- **State Management**: React Hooks
+- **Data Storage**: Local JSON files (theatreData.json, bookings.json)
 
-## Deploy on Vercel
+## Prerequisites
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- Node.js 18.17 or later
+- npm or yarn package manager
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Installation
+
+    1. Clone the repository:
+
+    ```bash
+    git clone <repository-url>
+    cd new-theatre-seating-app/my-app
+    ```
+
+    2. Install dependencies:
+
+    ```bash
+    npm install
+    # or
+    yarn install
+    ```
+
+    3. Run the development server:
+
+    ```bash
+    npm run dev
+    # or
+    yarn dev
+    ```
+
+    4. Open [http://localhost:3000](http://localhost:3000) in your browser
+
+## Project Structure
+
+    ```bash
+    my-app/
+    ├── src/
+    │   ├── app/
+    │   │   ├── booking/
+    │   │   │   └── [hallId]/
+    │   │   │       └── [eventId]/
+    │   │   │           └── page.js    # Booking page with seat selection
+    │   │   ├── page.js                # Landing page with event listings
+    │   │   └── ThemeProvider.js       # MUI theme configuration
+    │   └── data/
+    │       ├── theatreData.json       # Event and venue data
+    │       └── bookings.json          # Booking records
+    ├── public/
+    │   └── images/                    # Static images
+    └── package.json
+    ```
+
+## Features in Detail
+
+### Landing Page
+
+- Event cards with images and details
+- Real-time search across event names, descriptions, and venues
+- Price and date information
+- Direct booking links
+
+### Booking System
+
+- Interactive seating chart
+- Real-time seat availability
+- Alphabetic row labeling (A, B, C, etc.)
+- Visual seat status indicators
+- Seat selection validation
+
+### User Interface
+
+- Responsive design
+- Consistent color scheme (#145da0 primary color)
+- Clear visual hierarchy
+- Intuitive navigation
+
+## Development
+
+### Running Tests
+
+    ```bash
+    npm run test
+    # or
+    yarn test
+    ```
+
+### Building for Production
+
+    ```bash
+    npm run build
+    # or
+    yarn build
+    ```
+
+### Starting Production Server
+
+    ```bash
+    npm run start
+    # or
+    yarn start
+    ```
+
+## Contributing
+
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
+
+## Acknowledgments
+
+- Images sourced from Unsplash
+- Material-UI for the component library
+- Next.js team for the amazing framework

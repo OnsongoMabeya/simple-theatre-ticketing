@@ -1,101 +1,221 @@
-import Image from "next/image";
+'use client';
+
+import { useState, useEffect } from 'react';
+import {
+  Container,
+  Typography,
+  Grid,
+  Card,
+  CardContent,
+  CardMedia,
+  Box,
+  Button,
+  Chip,
+  Stack,
+  TextField,
+  InputAdornment
+} from '@mui/material';
+import { useRouter } from 'next/navigation';
+import CalendarTodayIcon from '@mui/icons-material/CalendarToday';
+import AccessTimeIcon from '@mui/icons-material/AccessTime';
+import ChairIcon from '@mui/icons-material/Chair';
+import SearchIcon from '@mui/icons-material/Search';
 
 export default function Home() {
-  return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              src/app/page.js
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+  const [theatreData, setTheatreData] = useState({ halls: [] });
+  const [loading, setLoading] = useState(true);
+  const [searchQuery, setSearchQuery] = useState('');
+  const router = useRouter();
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
-        </div>
-      </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch('/api/events');
+        if (!response.ok) {
+          throw new Error('Failed to fetch data');
+        }
+        const data = await response.json();
+        setTheatreData(data);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  const handleBooking = (hallId, eventId) => {
+    router.push(`/booking/${hallId}/${eventId}`);
+  };
+
+  const filterEvents = (halls, query) => {
+    if (!query) return halls;
+
+    return halls.map(hall => ({
+      ...hall,
+      events: hall.events.filter(event =>
+        event.name.toLowerCase().includes(query.toLowerCase()) ||
+        event.description.toLowerCase().includes(query.toLowerCase()) ||
+        hall.name.toLowerCase().includes(query.toLowerCase()) ||
+        event.date.includes(query)
+      )
+    })).filter(hall => hall.events.length > 0);
+  };
+
+  if (loading) {
+    return (
+      <Box sx={{ p: 4, textAlign: 'center' }}>
+        <Typography>Loading...</Typography>
+      </Box>
+    );
+  }
+
+  const filteredHalls = filterEvents(theatreData.halls, searchQuery);
+
+  return (
+    <Container maxWidth="lg" sx={{ py: 4 }}>
+      <Typography 
+        variant="h3" 
+        component="h1" 
+        gutterBottom 
+        sx={{ 
+          color: '#145da0',
+          fontWeight: 'bold',
+          textAlign: 'center',
+          mb: 4
+        }}
+      >
+        Theatre Events
+      </Typography>
+
+      {/* Search Box */}
+      <Box sx={{ mb: 4, display: 'flex', justifyContent: 'center' }}>
+        <TextField
+          fullWidth
+          variant="outlined"
+          placeholder="Search events by name, description, venue, or date..."
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
+          sx={{
+            maxWidth: '600px',
+            bgcolor: '#ffffff',
+            '& .MuiOutlinedInput-root': {
+              '& fieldset': {
+                borderColor: '#145da0',
+              },
+              '&:hover fieldset': {
+                borderColor: '#2e8bc0',
+              },
+              '&.Mui-focused fieldset': {
+                borderColor: '#145da0',
+              },
+            },
+          }}
+          InputProps={{
+            startAdornment: (
+              <InputAdornment position="start">
+                <SearchIcon sx={{ color: '#145da0' }} />
+              </InputAdornment>
+            ),
+          }}
+        />
+      </Box>
+      
+      <Grid container spacing={4}>
+        {filteredHalls.map((hall) => (
+          <Grid item xs={12} md={6} key={hall.id}>
+            <Card sx={{ 
+              height: '100%',
+              display: 'flex',
+              flexDirection: 'column',
+              borderRadius: '12px',
+              overflow: 'hidden',
+              boxShadow: '0 4px 12px rgba(0,0,0,0.1)',
+              bgcolor: '#ffffff'
+            }}>
+              <Typography
+                variant="h5"
+                sx={{
+                  bgcolor: '#f5f5f5',
+                  color: '#145da0',
+                  p: 2,
+                  fontWeight: 'bold',
+                  borderBottom: '2px solid #e0e0e0'
+                }}
+              >
+                {hall.name}
+              </Typography>
+              
+              <Box sx={{ p: 2, flexGrow: 1, bgcolor: '#ffffff' }}>
+                {hall.events.map((event) => (
+                  <Card
+                    key={event.id}
+                    sx={{
+                      mb: 2,
+                      borderRadius: '8px',
+                      border: '1px solid #e0e0e0',
+                      '&:last-child': { mb: 0 }
+                    }}
+                  >
+                    <CardMedia
+                      component="img"
+                      height="200"
+                      image={event.imageUrl}
+                      alt={event.name}
+                      sx={{ 
+                        height: 200,
+                        objectFit: 'cover',
+                        objectPosition: 'center'
+                      }}
+                    />
+                    <CardContent>
+                      <Typography variant="h6" sx={{ color: '#145da0', mb: 1 }}>
+                        {event.name}
+                      </Typography>
+                      <Typography variant="body2" color="text.secondary" sx={{ mb: 2 }}>
+                        {event.description}
+                      </Typography>
+                      <Stack direction="row" spacing={2} sx={{ mb: 2 }}>
+                        <Chip
+                          icon={<CalendarTodayIcon />}
+                          label={event.date}
+                          size="small"
+                          sx={{ bgcolor: '#f5f5f5' }}
+                        />
+                        <Chip
+                          icon={<AccessTimeIcon />}
+                          label={event.time}
+                          size="small"
+                          sx={{ bgcolor: '#f5f5f5' }}
+                        />
+                        <Chip
+                          icon={<ChairIcon />}
+                          label={`${event.availableSeats} seats`}
+                          size="small"
+                          sx={{ bgcolor: '#f5f5f5' }}
+                        />
+                      </Stack>
+                      <Button
+                        fullWidth
+                        variant="contained"
+                        onClick={() => handleBooking(hall.id, event.id)}
+                        sx={{
+                          bgcolor: '#145da0',
+                          '&:hover': { bgcolor: '#0c2d48' }
+                        }}
+                      >
+                        Book Now
+                      </Button>
+                    </CardContent>
+                  </Card>
+                ))}
+              </Box>
+            </Card>
+          </Grid>
+        ))}
+      </Grid>
+    </Container>
   );
 }

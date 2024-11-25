@@ -20,11 +20,14 @@ import CalendarTodayIcon from '@mui/icons-material/CalendarToday';
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
 import ChairIcon from '@mui/icons-material/Chair';
 import SearchIcon from '@mui/icons-material/Search';
+import AdminLoginModal from '@/components/AdminLoginModal';
 
 export default function Home() {
   const [theatreData, setTheatreData] = useState({ halls: [] });
   const [loading, setLoading] = useState(true);
   const [searchQuery, setSearchQuery] = useState('');
+  const [loginModalOpen, setLoginModalOpen] = useState(false);
+  const [adminKeySequence, setAdminKeySequence] = useState('');
   const router = useRouter();
 
   useEffect(() => {
@@ -44,6 +47,22 @@ export default function Home() {
     };
 
     fetchData();
+  }, []);
+
+  useEffect(() => {
+    const handleKeyPress = (event) => {
+      setAdminKeySequence(prev => {
+        const newSequence = (prev + event.key).slice(-5);
+        if (newSequence === 'admin') {
+          setLoginModalOpen(true);
+          return '';
+        }
+        return newSequence;
+      });
+    };
+
+    window.addEventListener('keypress', handleKeyPress);
+    return () => window.removeEventListener('keypress', handleKeyPress);
   }, []);
 
   const handleBooking = (hallId, eventId) => {
@@ -216,6 +235,10 @@ export default function Home() {
           </Grid>
         ))}
       </Grid>
+      <AdminLoginModal 
+        open={loginModalOpen} 
+        onClose={() => setLoginModalOpen(false)} 
+      />
     </Container>
   );
 }

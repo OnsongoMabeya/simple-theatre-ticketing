@@ -109,6 +109,61 @@ my-app/
 - Clear visual hierarchy
 - Intuitive navigation
 
+## Admin Features
+
+The application includes an administrative interface for managing bookings and verifying customer attendance. Here's how to access and use the admin features:
+
+### Accessing Admin Interface
+
+1. **Hidden Login Trigger**
+   - From the landing page, type the word "admin" (without quotes)
+   - This will trigger the admin login modal
+   - This hidden trigger ensures the admin interface remains discrete
+
+2. **Admin Credentials**
+   - Username: `admin`
+   - Password: `admin`
+   - Credentials can be modified in `src/data/adminCredentials.json`
+
+### Admin Dashboard Features
+
+1. **Booking Management**
+   - View all theatre bookings in a centralized dashboard
+   - See booking details including:
+     * Reference numbers
+     * Event information
+     * Customer details
+     * Seat assignments
+     * Event dates and times
+     * Check-in status
+
+2. **Search and Filter**
+   - Real-time search functionality
+   - Filter bookings by:
+     * Event name
+     * Customer name
+     * Seat numbers
+     * Reference numbers
+
+3. **Check-in System**
+   - Mark attendees as checked-in
+   - Visual indicators for check-in status
+   - Prevent duplicate check-ins
+   - Track attendance for each event
+
+4. **Security Features**
+   - Session-based authentication
+   - Protected admin routes
+   - Secure credential storage
+   - Automatic logout on session expiry
+
+### Security Considerations
+
+- Admin credentials should be changed before deployment
+- The admin interface is protected against unauthorized access
+- Session tokens are cleared on logout
+- API endpoints are protected against unauthorized requests
+
 ## Development
 
 ### Running Tests

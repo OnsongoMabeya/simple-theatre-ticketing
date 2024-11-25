@@ -69,12 +69,10 @@ export async function POST(request) {
 
 export async function GET() {
   try {
-    const theatreData = JSON.parse(await fs.readFile(theatreDataPath, 'utf8'));
-    return NextResponse.json(theatreData);
+    const bookingsData = await fs.readFile(bookingsDataPath, 'utf8');
+    return NextResponse.json(JSON.parse(bookingsData));
   } catch (error) {
-    console.error('Error fetching theatre data:', error);
-    return NextResponse.json({ 
-      error: 'Internal server error while fetching theatre data' 
-    }, { status: 500 });
+    console.error('Error reading bookings:', error);
+    return NextResponse.json({ error: 'Failed to fetch bookings' }, { status: 500 });
   }
 }

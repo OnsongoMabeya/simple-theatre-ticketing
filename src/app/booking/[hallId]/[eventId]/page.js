@@ -23,6 +23,7 @@ import CalendarTodayIcon from '@mui/icons-material/CalendarToday';
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
 import ChairIcon from '@mui/icons-material/Chair';
 import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
+import DownloadIcon from '@mui/icons-material/Download';
 
 export default function BookingPage() {
   const pathname = usePathname();
@@ -147,6 +148,14 @@ export default function BookingPage() {
       fetchEventData();
     } catch (error) {
       setErrorMessage(error.message || 'Failed to book seats. Please try again.');
+    }
+  };
+
+  const handleDownloadTicket = async () => {
+    try {
+      window.open(`/api/tickets/${bookingReference}`, '_blank');
+    } catch (error) {
+      setErrorMessage('Failed to download ticket. Please try again.');
     }
   };
 
@@ -517,6 +526,17 @@ export default function BookingPage() {
             }}
           >
             Go to Home
+          </Button>
+          <Button 
+            onClick={handleDownloadTicket}
+            variant="contained"
+            startIcon={<DownloadIcon />}
+            sx={{
+              backgroundColor: '#43a047',
+              '&:hover': { backgroundColor: '#2e7d32' }
+            }}
+          >
+            Download Ticket
           </Button>
           <Button 
             onClick={handleCloseDialog}

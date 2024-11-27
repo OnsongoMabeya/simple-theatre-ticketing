@@ -13,13 +13,21 @@
           "time": "19:30",
           "description": "Andrew Lloyd Webber's mesmerizing masterpiece",
           "price": 150,
-          "availableSeats": 145,
+          "availableSeats": 137,
           "bookedSeats": [
             "B-8",
             "B-5",
             "D-7",
             "D-8",
-            "D-9"
+            "D-9",
+            "C-10",
+            "C-11",
+            "C-12",
+            "C-13",
+            "E-10",
+            "E-9",
+            "E-11",
+            "E-12"
           ],
           "imageUrl": "https://images.unsplash.com/photo-1507676184212-d03ab07a01bf?q=80&w=800&auto=format&fit=crop"
         },

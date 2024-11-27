@@ -21,46 +21,6 @@
       "checkedIn": true
     },
     {
-      "referenceNumber": "BOK1732548531894",
-      "customerName": "John Doe",
-      "phone": "1234567890",
-      "eventDetails": {
-        "eventId": "m1",
-        "eventName": "The Phantom of the Opera",
-        "hallId": 1,
-        "hallName": "Main Hall",
-        "date": "2024-02-15",
-        "time": "19:30"
-      },
-      "seats": [
-        "B-5"
-      ],
-      "totalPrice": 150,
-      "bookingDate": "2024-11-25T15:28:51.894Z",
-      "status": "confirmed"
-    },
-    {
-      "referenceNumber": "BOK1732553930064",
-      "customerName": "John Doe",
-      "phone": "0987654321",
-      "eventDetails": {
-        "eventId": "m3",
-        "eventName": "Swan Lake Ballet",
-        "hallId": 1,
-        "hallName": "Main Hall",
-        "date": "2024-03-01",
-        "time": "19:30"
-      },
-      "seats": [
-        "C-7",
-        "C-8",
-        "C-9"
-      ],
-      "totalPrice": 420,
-      "bookingDate": "2024-11-25T16:58:50.064Z",
-      "status": "confirmed"
-    },
-    {
       "referenceNumber": "BOK1732554903972",
       "customerName": "Syntiche",
       "phone": "0798765432",
@@ -79,6 +39,50 @@
       ],
       "totalPrice": 450,
       "bookingDate": "2024-11-25T17:15:03.972Z",
+      "status": "confirmed"
+    },
+    {
+      "referenceNumber": "BOK1732627618546",
+      "customerName": "Jane",
+      "phone": "0987654321",
+      "eventDetails": {
+        "eventId": "m1",
+        "eventName": "The Phantom of the Opera",
+        "hallId": 1,
+        "hallName": "Main Hall",
+        "date": "2024-02-15",
+        "time": "19:30"
+      },
+      "seats": [
+        "C-10",
+        "C-11",
+        "C-12",
+        "C-13"
+      ],
+      "totalPrice": 600,
+      "bookingDate": "2024-11-26T13:26:58.546Z",
+      "status": "confirmed"
+    },
+    {
+      "referenceNumber": "BOK1732627905354",
+      "customerName": "Kuku",
+      "phone": "1223345456",
+      "eventDetails": {
+        "eventId": "m1",
+        "eventName": "The Phantom of the Opera",
+        "hallId": 1,
+        "hallName": "Main Hall",
+        "date": "2024-02-15",
+        "time": "19:30"
+      },
+      "seats": [
+        "E-10",
+        "E-9",
+        "E-11",
+        "E-12"
+      ],
+      "totalPrice": 600,
+      "bookingDate": "2024-11-26T13:31:45.354Z",
       "status": "confirmed"
     }
   ]

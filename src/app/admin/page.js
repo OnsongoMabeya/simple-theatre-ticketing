@@ -14,17 +14,25 @@ import {
   Checkbox,
   TextField,
   InputAdornment,
-  Button
+  Button,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
+  IconButton
 } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import CancelIcon from '@mui/icons-material/Cancel';
+import DeleteIcon from '@mui/icons-material/Delete';
 import { useRouter } from 'next/navigation';
 
 export default function AdminPage() {
   const [bookings, setBookings] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [deleteDialog, setDeleteDialog] = useState({ open: false, booking: null });
   const router = useRouter();
 
   useEffect(() => {
@@ -57,7 +65,8 @@ export default function AdminPage() {
     booking.eventDetails.eventName.toLowerCase().includes(searchTerm) ||
     booking.customerName.toLowerCase().includes(searchTerm) ||
     booking.seats.join(', ').toLowerCase().includes(searchTerm) ||
-    booking.referenceNumber.toLowerCase().includes(searchTerm)
+    booking.referenceNumber.toLowerCase().includes(searchTerm) ||
+    (booking.phone && booking.phone.toLowerCase().includes(searchTerm))
   );
 
   const handleCheckIn = async (bookingId) => {
@@ -80,6 +89,41 @@ export default function AdminPage() {
   const handleLogout = () => {
     sessionStorage.removeItem('adminToken');
     router.push('/');
+  };
+
+  const handleDeleteClick = (booking) => {
+    setDeleteDialog({ open: true, booking });
+  };
+
+  const handleDeleteClose = () => {
+    setDeleteDialog({ open: false, booking: null });
+  };
+
+  const handleDeleteConfirm = async () => {
+    try {
+      const response = await fetch('/api/bookings/delete', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          referenceNumber: deleteDialog.booking.referenceNumber,
+          adminCredentials: {
+            username: 'admin',
+            password: 'admin'
+          }
+        }),
+      });
+
+      if (response.ok) {
+        fetchBookings(); // Refresh the bookings list
+        handleDeleteClose();
+      } else {
+        console.error('Failed to delete booking');
+      }
+    } catch (error) {
+      console.error('Error deleting booking:', error);
+    }
   };
 
   if (!isAuthenticated) {
@@ -139,10 +183,12 @@ export default function AdminPage() {
               <TableCell sx={{ color: 'white' }}>Reference</TableCell>
               <TableCell sx={{ color: 'white' }}>Event</TableCell>
               <TableCell sx={{ color: 'white' }}>Customer</TableCell>
+              <TableCell sx={{ color: 'white' }}>Phone</TableCell>
               <TableCell sx={{ color: 'white' }}>Seats</TableCell>
               <TableCell sx={{ color: 'white' }}>Date & Time</TableCell>
               <TableCell sx={{ color: 'white' }}>Status</TableCell>
               <TableCell sx={{ color: 'white' }}>Check-in</TableCell>
+              <TableCell sx={{ color: 'white' }}>Actions</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -151,6 +197,7 @@ export default function AdminPage() {
                 <TableCell>{booking.referenceNumber}</TableCell>
                 <TableCell>{booking.eventDetails.eventName}</TableCell>
                 <TableCell>{booking.customerName}</TableCell>
+                <TableCell>{booking.phone}</TableCell>
                 <TableCell>{booking.seats.join(', ')}</TableCell>
                 <TableCell>
                   {new Date(booking.eventDetails.date).toLocaleDateString()} {booking.eventDetails.time}
@@ -169,11 +216,43 @@ export default function AdminPage() {
                     disabled={booking.checkedIn}
                   />
                 </TableCell>
+                <TableCell>
+                  <IconButton
+                    onClick={() => handleDeleteClick(booking)}
+                    color="error"
+                    size="small"
+                    title="Delete booking"
+                  >
+                    <DeleteIcon />
+                  </IconButton>
+                </TableCell>
               </TableRow>
             ))}
           </TableBody>
         </Table>
       </TableContainer>
+
+      {/* Delete Confirmation Dialog */}
+      <Dialog
+        open={deleteDialog.open}
+        onClose={handleDeleteClose}
+      >
+        <DialogTitle>Confirm Deletion</DialogTitle>
+        <DialogContent>
+          <DialogContentText>
+            Are you sure you want to delete the booking with reference number{' '}
+            {deleteDialog.booking?.referenceNumber}? This action cannot be undone.
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleDeleteClose} color="primary">
+            Cancel
+          </Button>
+          <Button onClick={handleDeleteConfirm} color="error" variant="contained">
+            Delete
+          </Button>
+        </DialogActions>
+      </Dialog>
     </Box>
   );
 }

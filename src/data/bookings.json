@@ -84,6 +84,47 @@
       "totalPrice": 600,
       "bookingDate": "2024-11-26T13:31:45.354Z",
       "status": "confirmed"
+    },
+    {
+      "referenceNumber": "BOK1732798265709",
+      "customerName": "John",
+      "phone": "0876352617",
+      "eventDetails": {
+        "eventId": "m1",
+        "eventName": "The Phantom of the Opera",
+        "hallId": 1,
+        "hallName": "Main Hall",
+        "date": "2024-02-15",
+        "time": "19:30"
+      },
+      "seats": [
+        "G-4",
+        "G-5",
+        "G-6"
+      ],
+      "totalPrice": 450,
+      "bookingDate": "2024-11-28T12:51:05.709Z",
+      "status": "confirmed"
+    },
+    {
+      "referenceNumber": "BOK1732798619223",
+      "customerName": "ten",
+      "phone": "0712345678",
+      "eventDetails": {
+        "eventId": "s1",
+        "eventName": "A Midsummer Night's Dream",
+        "hallId": 2,
+        "hallName": "Studio Theatre",
+        "date": "2024-02-18",
+        "time": "19:00"
+      },
+      "seats": [
+        "B-3",
+        "B-6"
+      ],
+      "totalPrice": 180,
+      "bookingDate": "2024-11-28T12:56:59.223Z",
+      "status": "confirmed"
     }
   ]
 }

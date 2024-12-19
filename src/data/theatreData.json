@@ -13,7 +13,7 @@
           "time": "19:30",
           "description": "Andrew Lloyd Webber's mesmerizing masterpiece",
           "price": 150,
-          "availableSeats": 137,
+          "availableSeats": 134,
           "bookedSeats": [
             "B-8",
             "B-5",
@@ -27,7 +27,10 @@
             "E-10",
             "E-9",
             "E-11",
-            "E-12"
+            "E-12",
+            "G-4",
+            "G-5",
+            "G-6"
           ],
           "imageUrl": "https://images.unsplash.com/photo-1507676184212-d03ab07a01bf?q=80&w=800&auto=format&fit=crop"
         },
@@ -105,8 +108,11 @@
           "time": "19:00",
           "description": "Shakespeare's beloved comedy in an intimate setting",
           "price": 90,
-          "availableSeats": 96,
-          "bookedSeats": [],
+          "availableSeats": 94,
+          "bookedSeats": [
+            "B-3",
+            "B-6"
+          ],
           "imageUrl": "https://images.unsplash.com/photo-1523554888454-84137e72c3ce?q=80&w=800&auto=format&fit=crop"
         },
         {
